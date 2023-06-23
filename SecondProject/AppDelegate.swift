@@ -8,12 +8,25 @@
 import UIKit
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenterDelegate{
 
-
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        completionHandler([.alert , .sound , .badge])
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+                
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.badge,.carPlay,.sound]) { (granted, error) in
+            if granted {
+                print("active")
+            }else{
+                print("no")
+            }
+        }
+        
+        UNUserNotificationCenter.current().delegate = self
         return true
     }
 

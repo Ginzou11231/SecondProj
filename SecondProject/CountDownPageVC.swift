@@ -7,6 +7,8 @@
 
 import UIKit
 import SnapKit
+import UserNotifications
+import AVFoundation
 
 class CountDownPageVC: UIViewController {
     
@@ -30,6 +32,8 @@ class CountDownPageVC: UIViewController {
     var circleBgView : UIView!
     var circularProgressBarView: CircleProgressBarView!
     
+    var mediaPlayer = AVQueuePlayer()
+    var mediaLooper : AVPlayerLooper?
     var TimerArray : [TimerModel]!
     var currentArrayIndex : Int = 0
     var triggerTimer : Timer!
@@ -40,6 +44,10 @@ class CountDownPageVC: UIViewController {
         super.viewDidLoad()
         uiInit()
         setTriggerTimer()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        mediaPlayer.pause()
     }
     
     func uiInit(){
@@ -462,6 +470,7 @@ class CountDownPageVC: UIViewController {
             })
             self.triggerTimer.invalidate()
             self.dismiss(animated: true)
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["Notification"])
         }
         let no = UIAlertAction(title: "No", style: .default)
         ac.addAction(yes)
@@ -471,6 +480,7 @@ class CountDownPageVC: UIViewController {
     
     @objc func nextBtnAction(sender: UIButton){
         triggerTimer.invalidate()
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["Notification"])
         
         if currentArrayIndex == TimerArray.count - 1{
             currentArrayIndex = 0
@@ -481,6 +491,8 @@ class CountDownPageVC: UIViewController {
     }
     
     @objc func closeBtnAction(sender : UIButton){
+        mediaPlayer.pause()
+        
         currentDate = Date()
         let currentTimeStr = formatter.string(from: currentDate)
         let currentTimeDate = formatter.date(from: currentTimeStr)
@@ -567,6 +579,21 @@ class CountDownPageVC: UIViewController {
         timeOffset += Double(index.min) * 60
         timeOffset += Double(index.sec)
         
+        if let reminder = (UserDefaults.standard.object(forKey: "ReminderBool") as? Bool) , reminder{
+            
+            let content = UNMutableNotificationContent()
+            content.title = "Notification"
+            content.subtitle = "Time Up"
+            content.body = "Go To Close Timer"
+            content.badge = 1
+            content.sound = UNNotificationSound.default
+            
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeOffset, repeats: false)
+            let request = UNNotificationRequest(identifier: "Notification", content: content, trigger: trigger)
+            
+            UNUserNotificationCenter.current().add(request , withCompletionHandler: nil)
+        }
+        
         clockTimerAction()
         circularProgressBarView.progressAnimation(duration: timeOffset)
         triggerTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(clockTimerAction), userInfo: nil, repeats: true)
@@ -577,6 +604,14 @@ class CountDownPageVC: UIViewController {
         
         if timeOffset <= 0{
             triggerTimer.invalidate()
+            
+            if let sound = (UserDefaults.standard.object(forKey: "SoundBool") as? Bool) , sound{
+                let url = Bundle.main.url(forResource: "Alarm", withExtension: "mp3")!
+                let item = AVPlayerItem(url: url)
+                mediaLooper = AVPlayerLooper(player: mediaPlayer, templateItem: item)
+                mediaPlayer.play()
+            }
+            
             uiShowHide(countEnd: true)
             clockAnime()
         }

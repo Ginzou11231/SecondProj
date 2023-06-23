@@ -166,7 +166,7 @@ class TimeModePageVC: UIViewController , UITextFieldDelegate , UICollectionViewD
             make.top.equalToSuperview()
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
-            make.height.equalTo(60)
+            make.height.equalTo(40)
         }
         
         titleLabel = UILabel()
@@ -178,7 +178,7 @@ class TimeModePageVC: UIViewController , UITextFieldDelegate , UICollectionViewD
         titleLabel.textAlignment = .center
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide)
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(-10)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
             make.height.equalTo(50)
@@ -455,11 +455,6 @@ class TimeModePageVC: UIViewController , UITextFieldDelegate , UICollectionViewD
         startDate = formatter.date(from: startTF.text!)
         endDate = formatter.date(from: endTF.text!)
         
-//        let str = formatter.string(from: Date())
-//        let date = formatter.date(from: str)
-//        
-//        print(endDate.timeIntervalSince(date!))
-        
         if startDate == endDate{
             let ac = UIAlertController(title: nil, message: "StartTime And EndTime\nCan't Same Value\n\nPlease Set Again\nStartTime And EndTime", preferredStyle: .alert)
             let ok = UIAlertAction(title: "OK", style: .default)
@@ -489,6 +484,19 @@ class TimeModePageVC: UIViewController , UITextFieldDelegate , UICollectionViewD
             
             if index == showSelect.count - 1{
                 array = customTimerDelegate.getTimers()
+                
+                if array.count == 0{
+                    let ac = UIAlertController(title: nil, message: "Your CustomTimer No Setting\nPlease Set Your CustomTimer Data ", preferredStyle: .alert)
+                    let ok = UIAlertAction(title: "OK", style: .default) { Action in
+                        let vc = CustomizeModePageVC()
+                        vc.modalPresentationStyle = .fullScreen
+                        vc.customTimerArray = self.customTimerDelegate
+                        self.present(vc , animated: true)
+                    }
+                    ac.addAction(ok)
+                    present(ac, animated: true)
+                    return
+                }
             }else{
                 array.append(timerArray[index])
             }

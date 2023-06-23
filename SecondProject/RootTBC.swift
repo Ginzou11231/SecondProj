@@ -16,6 +16,7 @@ class RootTBC: UITabBarController {
         super.viewDidLoad()
         createViewControllers()
         uiInit()
+        mainBtn.layer.borderColor = CGColor(red: 0, green: 0, blue:0, alpha: 0.7)
     }
 
     func createViewControllers(){
@@ -32,9 +33,13 @@ class RootTBC: UITabBarController {
     }
 
     func uiInit(){
-        tabBar.backgroundColor = .systemBlue
-        tabBar.layer.cornerRadius = 20
-        tabBar.isTranslucent = true
+        
+        let tabBar = { () -> CustomTabbar in
+            let tabBar = CustomTabbar()
+            tabBar.delegate = self
+            return tabBar
+        }()
+        self.setValue(tabBar, forKey: "tabBar")
         
         mainBtn = UIButton()
         setUIButton(button: mainBtn, image: UIImage(named: "main_icon"))
@@ -49,9 +54,8 @@ class RootTBC: UITabBarController {
             make.height.equalTo(60)
         }
         
-        
         settingBtn = UIButton()
-        setUIButton(button: settingBtn, image: UIImage(named: "main_icon"))
+        setUIButton(button: settingBtn, image: UIImage(named: "unsetting_icon"))
         settingBtn.addTarget(self, action: #selector(settingBtnAction(sender:)), for: .touchUpInside)
         
         tabBar.addSubview(settingBtn)
@@ -63,7 +67,7 @@ class RootTBC: UITabBarController {
         }
         
         aboutBtn = UIButton()
-        setUIButton(button: aboutBtn, image: UIImage(named: "main_icon"))
+        setUIButton(button: aboutBtn, image: UIImage(named: "unabout_icon"))
         aboutBtn.addTarget(self, action: #selector(aboutBtnAction(sender:)), for: .touchUpInside)
         
         tabBar.addSubview(aboutBtn)
@@ -80,8 +84,8 @@ class RootTBC: UITabBarController {
         button.imageView?.contentMode = .scaleAspectFill
         button.backgroundColor = .clear
         button.layer.cornerRadius = 10
-        button.layer.borderColor = CGColor(red: 0, green: 0, blue:0, alpha: 1)
-        button.layer.borderWidth = 3
+        button.layer.borderColor = CGColor(red: 0, green: 0, blue:0, alpha: 0)
+        button.layer.borderWidth = 2
         button.clipsToBounds = false
         button.adjustsImageWhenHighlighted = false
     }
@@ -89,28 +93,45 @@ class RootTBC: UITabBarController {
     @objc func mainBtnAction(sender : UIButton){
         selectedIndex = 0
         mainBtn.backgroundColor = .white
+        mainBtn.layer.borderColor = CGColor(red: 0, green: 0, blue:0, alpha: 1)
+        mainBtn.setImage(UIImage(named: "main_icon"), for: .normal)
         settingBtn.backgroundColor = .clear
+        settingBtn.layer.borderColor = CGColor(red: 0, green: 0, blue:0, alpha: 0)
+        settingBtn.setImage(UIImage(named: "unsetting_icon"), for: .normal)
         aboutBtn.backgroundColor = .clear
+        aboutBtn.layer.borderColor = CGColor(red: 0, green: 0, blue:0, alpha: 0)
+        aboutBtn.setImage(UIImage(named: "unabout_icon"), for: .normal)
     }
     
     @objc func settingBtnAction(sender : UIButton){
         selectedIndex = 1
         mainBtn.backgroundColor = .clear
+        mainBtn.layer.borderColor = CGColor(red: 0, green: 0, blue:0, alpha: 0)
+        mainBtn.setImage(UIImage(named: "unmain_icon"), for: .normal)
         settingBtn.backgroundColor = .white
+        settingBtn.layer.borderColor = CGColor(red: 0, green: 0, blue:0, alpha: 1)
+        settingBtn.setImage(UIImage(named: "setting_icon"), for: .normal)
         aboutBtn.backgroundColor = .clear
+        aboutBtn.layer.borderColor = CGColor(red: 0, green: 0, blue:0, alpha: 0)
+        aboutBtn.setImage(UIImage(named: "unabout_icon"), for: .normal)
     }
     
     @objc func aboutBtnAction(sender : UIButton){
         selectedIndex = 2
         mainBtn.backgroundColor = .clear
+        mainBtn.layer.borderColor = CGColor(red: 0, green: 0, blue:0, alpha: 0)
+        mainBtn.setImage(UIImage(named: "unmain_icon"), for: .normal)
         settingBtn.backgroundColor = .clear
+        settingBtn.layer.borderColor = CGColor(red: 0, green: 0, blue:0, alpha: 0)
+        settingBtn.setImage(UIImage(named: "unsetting_icon"), for: .normal)
         aboutBtn.backgroundColor = .white
+        aboutBtn.layer.borderColor = CGColor(red: 0, green: 0, blue:0, alpha: 1)
+        aboutBtn.setImage(UIImage(named: "about_icon"), for: .normal)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let position = touch.location(in: tabBar)
-            
             if position.x >= mainBtn.frame.minX && position.x <= mainBtn.frame.maxX{
                 if position.y >= mainBtn.frame.minY && position.y <= mainBtn.frame.maxY{
                     mainBtnAction(sender: mainBtn)
@@ -128,7 +149,6 @@ class RootTBC: UITabBarController {
                     aboutBtnAction(sender: aboutBtn)
                 }
             }
-            
         }
     }
 }

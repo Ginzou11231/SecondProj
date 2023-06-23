@@ -24,6 +24,10 @@
 		688BF09B2A3B4824009AB14E /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688BF09A2A3B4824009AB14E /* TimerModel.swift */; };
 		688BF09D2A3C84F6009AB14E /* CountDownPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688BF09C2A3C84F6009AB14E /* CountDownPageVC.swift */; };
 		688BF09F2A3C979E009AB14E /* CircleProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688BF09E2A3C979E009AB14E /* CircleProgressBarView.swift */; };
+		688BF0A12A403560009AB14E /* SettingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688BF0A02A403560009AB14E /* SettingTableCell.swift */; };
+		688BF0A52A42A247009AB14E /* AboutTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688BF0A42A42A247009AB14E /* AboutTableCell.swift */; };
+		688BF0A72A456806009AB14E /* Alarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 688BF0A62A456806009AB14E /* Alarm.mp3 */; };
+		688BF0A92A45993E009AB14E /* CustomTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688BF0A82A45993E009AB14E /* CustomTabbar.swift */; };
 		C7DDD66A8CCAA32517390005 /* Pods_SecondProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B0592C621042EFEF80E02C6 /* Pods_SecondProject.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +53,10 @@
 		688BF09A2A3B4824009AB14E /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
 		688BF09C2A3C84F6009AB14E /* CountDownPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownPageVC.swift; sourceTree = "<group>"; };
 		688BF09E2A3C979E009AB14E /* CircleProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProgressBarView.swift; sourceTree = "<group>"; };
+		688BF0A02A403560009AB14E /* SettingTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableCell.swift; sourceTree = "<group>"; };
+		688BF0A42A42A247009AB14E /* AboutTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTableCell.swift; sourceTree = "<group>"; };
+		688BF0A62A456806009AB14E /* Alarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Alarm.mp3; sourceTree = "<group>"; };
+		688BF0A82A45993E009AB14E /* CustomTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabbar.swift; sourceTree = "<group>"; };
 		A79929F40069AB69927253A7 /* Pods-SecondProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecondProject.debug.xcconfig"; path = "Target Support Files/Pods-SecondProject/Pods-SecondProject.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,20 +101,24 @@
 		688BF06F2A374F05009AB14E /* SecondProject */ = {
 			isa = PBXGroup;
 			children = (
+				688BF0A62A456806009AB14E /* Alarm.mp3 */,
 				688BF0702A374F05009AB14E /* AppDelegate.swift */,
 				688BF0722A374F05009AB14E /* SceneDelegate.swift */,
 				688BF09A2A3B4824009AB14E /* TimerModel.swift */,
 				688BF09E2A3C979E009AB14E /* CircleProgressBarView.swift */,
 				688BF0862A3750D9009AB14E /* RootTBC.swift */,
+				688BF0A82A45993E009AB14E /* CustomTabbar.swift */,
 				688BF08A2A3755F5009AB14E /* MainPageVC.swift */,
 				688BF0902A394AB9009AB14E /* TimeModePageVC.swift */,
 				688BF0922A3960C0009AB14E /* TimerCollectionCell.swift */,
 				688BF0942A396BC3009AB14E /* TimePickerVC.swift */,
+				688BF09C2A3C84F6009AB14E /* CountDownPageVC.swift */,
 				688BF0962A3B3701009AB14E /* CustomizeModePageVC.swift */,
 				688BF0982A3B3D38009AB14E /* CustomListCollectionCell.swift */,
 				688BF08C2A375621009AB14E /* SettingPageVC.swift */,
+				688BF0A02A403560009AB14E /* SettingTableCell.swift */,
 				688BF08E2A37562F009AB14E /* AboutPageVC.swift */,
-				688BF09C2A3C84F6009AB14E /* CountDownPageVC.swift */,
+				688BF0A42A42A247009AB14E /* AboutTableCell.swift */,
 				688BF0762A374F05009AB14E /* Main.storyboard */,
 				688BF0792A374F06009AB14E /* Assets.xcassets */,
 				688BF07B2A374F06009AB14E /* LaunchScreen.storyboard */,
@@ -184,6 +196,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				688BF0A72A456806009AB14E /* Alarm.mp3 in Resources */,
 				688BF07D2A374F06009AB14E /* LaunchScreen.storyboard in Resources */,
 				688BF07A2A374F06009AB14E /* Assets.xcassets in Resources */,
 				688BF0782A374F05009AB14E /* Main.storyboard in Resources */,
@@ -241,9 +254,11 @@
 			files = (
 				688BF0992A3B3D38009AB14E /* CustomListCollectionCell.swift in Sources */,
 				688BF0712A374F05009AB14E /* AppDelegate.swift in Sources */,
+				688BF0A52A42A247009AB14E /* AboutTableCell.swift in Sources */,
 				688BF09F2A3C979E009AB14E /* CircleProgressBarView.swift in Sources */,
 				688BF0732A374F05009AB14E /* SceneDelegate.swift in Sources */,
 				688BF0872A3750D9009AB14E /* RootTBC.swift in Sources */,
+				688BF0A12A403560009AB14E /* SettingTableCell.swift in Sources */,
 				688BF0912A394AB9009AB14E /* TimeModePageVC.swift in Sources */,
 				688BF09D2A3C84F6009AB14E /* CountDownPageVC.swift in Sources */,
 				688BF09B2A3B4824009AB14E /* TimerModel.swift in Sources */,
@@ -253,6 +268,7 @@
 				688BF0952A396BC3009AB14E /* TimePickerVC.swift in Sources */,
 				688BF0972A3B3701009AB14E /* CustomizeModePageVC.swift in Sources */,
 				688BF08F2A37562F009AB14E /* AboutPageVC.swift in Sources */,
+				688BF0A92A45993E009AB14E /* CustomTabbar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

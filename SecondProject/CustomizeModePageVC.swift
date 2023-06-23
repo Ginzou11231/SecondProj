@@ -77,7 +77,7 @@ class CustomizeModePageVC: UIViewController , UICollectionViewDelegate , UIColle
             make.top.equalToSuperview()
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
-            make.height.equalTo(60)
+            make.height.equalTo(50)
         }
         
         titleLabel = UILabel()
@@ -89,7 +89,7 @@ class CustomizeModePageVC: UIViewController , UICollectionViewDelegate , UIColle
         titleLabel.textAlignment = .center
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide)
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(-10)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
             make.height.equalTo(50)
@@ -120,7 +120,7 @@ class CustomizeModePageVC: UIViewController , UICollectionViewDelegate , UIColle
         }
         editBtn.showsMenuAsPrimaryAction = true
         editBtn.menu = UIMenu(children: [
-            UIAction(title: "Clear",image: UIImage(systemName: "trash.fill") , handler: { Action in
+            UIAction(title: "Clear All",image: UIImage(systemName: "trash.fill") , handler: { Action in
                 let ac = UIAlertController(title: "Alert", message: "Are You Sure Delete All Timer Data?", preferredStyle: .alert)
                 let yes = UIAlertAction(title: "Yes", style: .default) { Action in
                     self.customTimers = []
@@ -152,7 +152,7 @@ class CustomizeModePageVC: UIViewController , UICollectionViewDelegate , UIColle
             make.top.equalTo(titleLabel.snp.bottom)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-90)
         }
         
         addBtn = UIButton()
@@ -175,7 +175,7 @@ class CustomizeModePageVC: UIViewController , UICollectionViewDelegate , UIColle
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomListCollectionCell.cellIdentifier, for: indexPath) as! CustomListCollectionCell
         
-        if indexPath.item < 10{
+        if indexPath.item < 9{
             cell.numLabel.text = "0\(String(indexPath.item + 1))"
         }else{
             cell.numLabel.text = String(indexPath.item + 1)
@@ -223,13 +223,13 @@ class CustomizeModePageVC: UIViewController , UICollectionViewDelegate , UIColle
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-            cell.transform = CGAffineTransform(scaleX: 0, y: 0)
-            
-            UIView.animate(withDuration: 0.5,delay: 0.1 * Double(indexPath.item) , animations: {
-                cell.transform = CGAffineTransform(scaleX: 1, y: 1)
-            })
-    }
+//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//            cell.transform = CGAffineTransform(scaleX: 0, y: 0)
+//
+//            UIView.animate(withDuration: 0.5,delay: 0.1 * Double(indexPath.item) , animations: {
+//                cell.transform = CGAffineTransform(scaleX: 1, y: 1)
+//            })
+//    }
     
     @objc func editBtnAction(sender : UIButton){
         let ac = UIAlertController(title: "", message: "Option", preferredStyle: .actionSheet)
