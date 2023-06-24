@@ -13,7 +13,7 @@ protocol TimeModeDelegate{
     func setEndTime(setTime : String)
 }
 
-class TimeModePageVC: UIViewController , UITextFieldDelegate , UICollectionViewDelegate , UICollectionViewDataSource , TimeModeDelegate {
+class TimeModePageVC: UIViewController , UITextFieldDelegate , UICollectionViewDelegate , UICollectionViewDataSource , TimeModeDelegate , UIViewControllerTransitioningDelegate {
     
     func setStartTime(setTime : String){
         startTF.attributedText = NSAttributedString(string: setTime , attributes: [
@@ -27,6 +27,10 @@ class TimeModePageVC: UIViewController , UITextFieldDelegate , UICollectionViewD
             NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 24),
             NSAttributedString.Key.kern: 2 ,
             NSAttributedString.Key.foregroundColor: UIColor.white])
+    }
+    
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        PresentationController(presentedViewController: presented, presenting: presenting)
     }
 
     var titleBGView : UIView!
@@ -428,9 +432,9 @@ class TimeModePageVC: UIViewController , UITextFieldDelegate , UICollectionViewD
         
         let vc = TimePickerVC()
         
-        if let sheetPresentationController = vc.sheetPresentationController {
-            sheetPresentationController.detents = [.medium()]
-        }
+//        if let sheetPresentationController = vc.sheetPresentationController {
+//            sheetPresentationController.detents = [.medium()]
+//        }
         
         if textField == startTF{
             vc.prevFrom = PrevFromEnum.start.rawValue
@@ -438,6 +442,8 @@ class TimeModePageVC: UIViewController , UITextFieldDelegate , UICollectionViewD
             vc.prevFrom = PrevFromEnum.end.rawValue
         }
         vc.timeModeDelegate = self
+        vc.modalPresentationStyle = .custom
+        vc.transitioningDelegate = self
         
         present(vc ,animated: true)
         view.endEditing(true)

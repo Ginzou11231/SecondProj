@@ -13,7 +13,7 @@ protocol TimerFunctionDelegate {
     func editTimer(editdata : TimerModel , hour : Int , min : Int , sec : Int)
 }
 
-class CustomizeModePageVC: UIViewController , UICollectionViewDelegate , UICollectionViewDataSource , TimerFunctionDelegate {
+class CustomizeModePageVC: UIViewController , UICollectionViewDelegate , UICollectionViewDataSource , TimerFunctionDelegate , UIViewControllerTransitioningDelegate {
     
     func appendTimer(hour : Int , min : Int , sec : Int) {
         let model = TimerModel()
@@ -50,6 +50,10 @@ class CustomizeModePageVC: UIViewController , UICollectionViewDelegate , UIColle
         }
         customTimerArray.setTimers(array: customTimers)
         listCV.reloadData()
+    }
+    
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        PresentationController(presentedViewController: presented, presenting: presenting)
     }
     
     var titleBGView : UIView!
@@ -108,32 +112,31 @@ class CustomizeModePageVC: UIViewController , UICollectionViewDelegate , UIColle
             make.height.equalTo(50)
         }
         
-        editBtn = UIButton()
-        editBtn.setImage(UIImage(systemName: "pencil"), for: .normal)
-        editBtn.tintColor = UIColor(cgColor: CGColor(red: 2 / 255, green: 69 / 255, blue: 113 / 255, alpha: 1))
-        view.addSubview(editBtn)
-        editBtn.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel)
-            make.trailing.equalToSuperview()
-            make.width.equalTo(50)
-            make.height.equalTo(50)
-        }
-        editBtn.showsMenuAsPrimaryAction = true
-        editBtn.menu = UIMenu(children: [
-            UIAction(title: "Clear All",image: UIImage(systemName: "trash.fill") , handler: { Action in
-                let ac = UIAlertController(title: "Alert", message: "Are You Sure Delete All Timer Data?", preferredStyle: .alert)
-                let yes = UIAlertAction(title: "Yes", style: .default) { Action in
-                    self.customTimers = []
-                    self.customTimerArray.setTimers(array: self.customTimers)
-                    self.listCV.reloadData()
-                }
-                let no = UIAlertAction(title: "No", style: .default)
-                ac.addAction(yes)
-                ac.addAction(no)
-                self.present(ac , animated: true)
-            })
-        ])
-        
+//        editBtn = UIButton()
+//        editBtn.setImage(UIImage(systemName: "pencil"), for: .normal)
+//        editBtn.tintColor = UIColor(cgColor: CGColor(red: 2 / 255, green: 69 / 255, blue: 113 / 255, alpha: 1))
+//        view.addSubview(editBtn)
+//        editBtn.snp.makeConstraints { make in
+//            make.top.equalTo(titleLabel)
+//            make.trailing.equalToSuperview()
+//            make.width.equalTo(50)
+//            make.height.equalTo(50)
+//        }
+//        editBtn.showsMenuAsPrimaryAction = true
+//        editBtn.menu = UIMenu(children: [
+//            UIAction(title: "Clear All",image: UIImage(systemName: "trash.fill") , handler: { Action in
+//                let ac = UIAlertController(title: "Alert", message: "Are You Sure Delete All Timer Data?", preferredStyle: .alert)
+//                let yes = UIAlertAction(title: "Yes", style: .default) { Action in
+//                    self.customTimers = []
+//                    self.customTimerArray.setTimers(array: self.customTimers)
+//                    self.listCV.reloadData()
+//                }
+//                let no = UIAlertAction(title: "No", style: .default)
+//                ac.addAction(yes)
+//                ac.addAction(no)
+//                self.present(ac , animated: true)
+//            })
+//        ])
         
         listFL = UICollectionViewFlowLayout()
         listFL.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
@@ -236,10 +239,12 @@ class CustomizeModePageVC: UIViewController , UICollectionViewDelegate , UIColle
         let edit = UIAlertAction(title: "Edit", style: .default) { Action in
             let vc = TimePickerVC()
             
-            if let sheet = vc.sheetPresentationController{
-                sheet.detents = [.medium()]
-            }
+//            if let sheet = vc.sheetPresentationController{
+//                sheet.detents = [.medium()]
+//            }
+            vc.modalPresentationStyle = .custom
             vc.arrayDelegate = self
+            vc.transitioningDelegate = self
             vc.prevFrom = PrevFromEnum.edit.rawValue
             vc.editData = self.customTimers[sender.tag]
             self.present(vc , animated: true)
@@ -263,11 +268,12 @@ class CustomizeModePageVC: UIViewController , UICollectionViewDelegate , UIColle
     @objc func addBtnAction(sender : UIButton){
         let vc = TimePickerVC()
         
-        if let sheetController = vc.sheetPresentationController{
-            sheetController.detents = [.medium()]
-        }
+//        if let sheetController = vc.sheetPresentationController{
+//            sheetController.detents = [.medium()]
+//        }
         vc.arrayDelegate = self
         vc.prevFrom = PrevFromEnum.append.rawValue
+        vc.transitioningDelegate = self
         present(vc , animated: true)
     }
 }

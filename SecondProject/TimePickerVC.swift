@@ -33,6 +33,8 @@ class TimePickerVC: UIViewController , UIPickerViewDelegate , UIPickerViewDataSo
         super.viewDidLoad()
         uiInit()
         
+        
+        
         hourArray = []
         minArray = []
         secArray = []

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		688A18A02A46E23A00199E48 /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688A189F2A46E23A00199E48 /* PresentationController.swift */; };
 		688BF0712A374F05009AB14E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688BF0702A374F05009AB14E /* AppDelegate.swift */; };
 		688BF0732A374F05009AB14E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688BF0722A374F05009AB14E /* SceneDelegate.swift */; };
 		688BF0782A374F05009AB14E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 688BF0762A374F05009AB14E /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 /* Begin PBXFileReference section */
 		3B0592C621042EFEF80E02C6 /* Pods_SecondProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SecondProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		57A5EE15A38D7133718690CA /* Pods-SecondProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecondProject.release.xcconfig"; path = "Target Support Files/Pods-SecondProject/Pods-SecondProject.release.xcconfig"; sourceTree = "<group>"; };
+		688A189F2A46E23A00199E48 /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
 		688BF06D2A374F05009AB14E /* SecondProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SecondProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		688BF0702A374F05009AB14E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		688BF0722A374F05009AB14E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 			children = (
 				688BF0A62A456806009AB14E /* Alarm.mp3 */,
 				688BF0702A374F05009AB14E /* AppDelegate.swift */,
+				688A189F2A46E23A00199E48 /* PresentationController.swift */,
 				688BF0722A374F05009AB14E /* SceneDelegate.swift */,
 				688BF09A2A3B4824009AB14E /* TimerModel.swift */,
 				688BF09E2A3C979E009AB14E /* CircleProgressBarView.swift */,
@@ -263,6 +266,7 @@
 				688BF09D2A3C84F6009AB14E /* CountDownPageVC.swift in Sources */,
 				688BF09B2A3B4824009AB14E /* TimerModel.swift in Sources */,
 				688BF0932A3960C0009AB14E /* TimerCollectionCell.swift in Sources */,
+				688A18A02A46E23A00199E48 /* PresentationController.swift in Sources */,
 				688BF08B2A3755F5009AB14E /* MainPageVC.swift in Sources */,
 				688BF08D2A375621009AB14E /* SettingPageVC.swift in Sources */,
 				688BF0952A396BC3009AB14E /* TimePickerVC.swift in Sources */,
@@ -344,7 +348,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -398,7 +402,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
