@@ -21,7 +21,6 @@ class CountDownPageVC: UIViewController {
     var countHourLabel , countMinLabel , countSecLabel : UILabel!
     var countHMColonLabel , countMSColonLabel : UILabel!
     
-    
     var startTimeDate , endTimeDate , currentDate : Date!
     var formatter = DateFormatter()
     
@@ -44,10 +43,6 @@ class CountDownPageVC: UIViewController {
         super.viewDidLoad()
         uiInit()
         setTriggerTimer()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        mediaPlayer.pause()
     }
     
     func uiInit(){
@@ -455,6 +450,10 @@ class CountDownPageVC: UIViewController {
             sender.setBackgroundImage(UIImage(named: "play_icon"), for: .normal)
             triggerTimer.invalidate()
             circularProgressBarView.progressStop()
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["Notification"])
+            countHourLabel.attributedText = NSAttributedString(string: "00" ,attributes: [NSAttributedString.Key.kern: 2 ])
+            countMinLabel.attributedText = NSAttributedString(string: "00" ,attributes: [NSAttributedString.Key.kern: 2 ])
+            countSecLabel.attributedText = NSAttributedString(string: "00" ,attributes: [NSAttributedString.Key.kern: 2 ])
         }else{
             sender.isSelected = true
             sender.setBackgroundImage(UIImage(named: "pause_icon"), for: .normal)
@@ -469,8 +468,9 @@ class CountDownPageVC: UIViewController {
                 self.bgView.alpha = 0
             })
             self.triggerTimer.invalidate()
-            self.dismiss(animated: true)
+            self.mediaPlayer.pause()
             UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["Notification"])
+            self.dismiss(animated: true)
         }
         let no = UIAlertAction(title: "No", style: .default)
         ac.addAction(yes)
@@ -480,6 +480,7 @@ class CountDownPageVC: UIViewController {
     
     @objc func nextBtnAction(sender: UIButton){
         triggerTimer.invalidate()
+        circularProgressBarView.progressStop()
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["Notification"])
         
         if currentArrayIndex == TimerArray.count - 1{
@@ -487,6 +488,9 @@ class CountDownPageVC: UIViewController {
         }else{
             currentArrayIndex += 1
         }
+        
+        playBtn.isSelected = true
+        playBtn.setBackgroundImage(UIImage(named: "pause_icon"), for: .normal)
         setClockTimer()
     }
     
@@ -585,7 +589,7 @@ class CountDownPageVC: UIViewController {
             content.title = "Notification"
             content.subtitle = "Time Up"
             content.body = "Go To Close Timer"
-            content.badge = 1
+            content.badge = 0
             content.sound = UNNotificationSound.default
             
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeOffset, repeats: false)

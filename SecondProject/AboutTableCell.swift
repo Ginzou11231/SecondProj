@@ -47,7 +47,7 @@ class AboutTableCell: UITableViewCell {
         }
         
         indexTextView = UITextView()
-        indexTextView.text = "aasasddoijsdoifjsodiidisodjfsoijfoijdfosijffjsdoifjsdofijzoijpsdjapj\nasd\n\nokofk"
+        indexTextView.text = "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet."
         indexTextView.isEditable = false
         indexTextView.textAlignment = .left
         indexTextView.textColor = .black

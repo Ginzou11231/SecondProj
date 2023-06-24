@@ -124,7 +124,7 @@ class AboutPageVC: UIViewController , UITableViewDelegate , UITableViewDataSourc
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
             if selectBool{
-                return 200
+                return 300
             }else{
                 return UITableView.automaticDimension
             }
